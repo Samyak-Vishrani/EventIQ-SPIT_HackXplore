@@ -15,7 +15,7 @@ const Login = () => {
       <div className="container">
         <div className="login-box">
           <div className="text-center">
-            <h1 className="title">Event AI</h1>
+            <h1 className="title" style={{fontFamily:'Quicksand', fontWeight:'200'}}>EventIQ</h1>
             <p className="subtitle">Automate your event management</p>
           </div>
 
@@ -48,7 +48,7 @@ const Login = () => {
           </form>
 
           <div className="text-center">
-            <a href="/signup" className="signup-link">
+            <a href="/register" className="signup-link">
               Create an account
             </a>
           </div>

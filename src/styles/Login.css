@@ -78,11 +78,6 @@
   transition: all 0.3s ease-in-out;
 }
 
-.submit-button:hover {
-  background-color: #1f2937;
-  transform: scale(1.05);
-}
-
 .text-center {
   margin-top: 3vh;
 }
@@ -94,9 +89,9 @@
 }
 
 .signup-link {
-  color: #6b7280;
+  color: #ffffff;
   text-decoration: none;
-  transition: color 0.3s;
+  transition: color 0.3s; 
   margin-top: 10vh;
 }
 

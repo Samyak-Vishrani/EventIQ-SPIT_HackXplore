@@ -39,8 +39,8 @@ const Sidebar = () => {
                     marginBottom: 2,
                 }}
             >
-                <Typography variant="h5" component="div">
-                    Your Logo
+                <Typography variant="h5" component="div" style={{fontFamily:'Quicksand', fontWeight:'300', fontSize:'30px'}}>
+                    EventIQ
                 </Typography>
             </Box>
 
@@ -55,7 +55,7 @@ const Sidebar = () => {
                                     : 'transparent',
                                 color: activeButton === text ? 'white' : 'inherit',
                                 '&:hover': {
-                                    backgroundColor: 'var(--dark-red)',
+                                    backgroundColor: 'gray',
                                     color: 'white',
                                     transition: 'all 0.5s ease'
                                 }
@@ -78,7 +78,7 @@ const Sidebar = () => {
                                     : 'transparent',
                                 color: activeButton === text ? 'white' : 'inherit',
                                 '&:hover': {
-                                    backgroundColor: 'var(--dark-red)',
+                                    backgroundColor: 'gray',
                                     color: 'white',
                                     transition: 'all 0.5s ease'
                                 }

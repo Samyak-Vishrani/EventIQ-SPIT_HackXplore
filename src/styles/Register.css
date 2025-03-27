@@ -4,7 +4,7 @@
     min-height: 100vh;
     align-items: center;
     justify-content: center;
-    background-color: white;
+    background-color: var(--dark-red);
   }
   
   .signup-box {
@@ -22,12 +22,12 @@
   .title {
     font-size: 1.875rem; /* 3xl */
     font-weight: bold;
-    color: #1f2937; /* gray-800 */
+    color: white; /* gray-800 */
     margin-bottom: 0.5rem;
   }
   
   .subtitle {
-    color: #6b7280; /* gray-500 */
+    color: #ffffff; /* gray-500 */
   }
   
   /* Form Styling */
@@ -40,15 +40,20 @@
   .input-field {
     width: 100%;
     border: none;
-    border-bottom: 2px solid #d1d5db; /* gray-300 */
+    border-bottom: 2px solid #ffffff; /* gray-300 */
     font-size: 1.125rem; /* lg */
     padding: 0.5rem;
     outline: none;
     transition: border-color 0.3s;
+    color: #ffffff;
   }
   
   .input-field:focus {
     border-color: black;
+  }
+
+  ::placeholder {
+    color:rgba(246, 255, 0, 0.724);
   }
   
   /* Button Styling */
@@ -63,13 +68,9 @@
     transition: background-color 0.3s;
   }
   
-  .submit-button:hover {
-    background-color: #1f2937; /* gray-800 */
-  }
-  
   /* Login Link */
   .login-link {
-    color: #6b7280; /* gray-500 */
+    color: #ffffff; /* gray-500 */
     text-decoration: none;
     transition: color 0.3s;
   }

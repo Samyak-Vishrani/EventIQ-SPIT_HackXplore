@@ -20,7 +20,7 @@ const Register = () => {
       <div className="container">
         <div className="signup-box">
           <div className="text-center">
-            <h1 className="title">Join Event AI</h1>
+            <h1 className="title" style={{fontFamily:'Quicksand', fontWeight:'200'}}>EventIQ</h1>
             <p className="subtitle">Start automating your event management</p>
           </div>
 
