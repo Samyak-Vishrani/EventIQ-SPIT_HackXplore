@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import "../styles/deptList.css";
 import members from "../assets/members.svg";
+import task_incomplete from "../assets/task_incomplete.svg";
 
 const DeptList = () => {
 
@@ -28,13 +29,17 @@ const DeptList = () => {
                 dept.map(item => {
                     return <div className='card'>
                         <div className='card-header'>
-                            <h2>{item.name}</h2>
+                            <h2>{item.name} Department</h2>
                             <p>{item.members} members <img src={members} /> </p>
                         </div>
                         <div className='task-list'>
+                            <h3>Task Assigned (Not Completed) </h3>
                             {item.taskAssign.map(task => {
-                                return <div className='task'>{task}</div>
+                                return <div className='task'> <img src={task_incomplete} /> {task}</div>
                             })}
+                        </div>
+                        <div className=''>
+
                         </div>
                     </div>
                 })

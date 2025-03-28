@@ -27,6 +27,7 @@
     background-color: var(--dark-red);
     margin: 2vh auto;
     height: fit-content;
+    padding-bottom: 3vh;
 }
 
 .dept-list-container .card .card-header {
@@ -49,4 +50,24 @@
     align-items: center;
     gap: 5px;
     font-weight: 500;
+}
+
+.dept-list-container .card .task-list {
+    width: 100%;
+    box-sizing: border-box;
+    padding: 0vh 2vw;
+}
+
+.dept-list-container .card .task-list h3 {
+    color: var(--light-red);
+}
+
+.dept-list-container .card .task-list .task {
+    padding: 1vh 1vw;
+    background-color: rgb(162, 162, 162);       
+    margin-bottom: 10px;
+    font-weight: 500;
+    display: flex;
+    align-items: center;
+    gap: 20px;
 }
