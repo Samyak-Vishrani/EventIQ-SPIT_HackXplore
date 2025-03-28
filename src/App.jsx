@@ -5,6 +5,7 @@ import Register from './pages/Register';
 import AssignTask from "./pages/AssignTask";
 import Checklist from "./pages/Checklist";
 import Department from "./pages/Department";
+import CommitteeList from "./components/CommitteeList";
 
 function App() {
 
@@ -17,6 +18,7 @@ function App() {
         <Route path="/assigntask" element={<AssignTask />} />
         <Route path="/checklist" element={<Checklist />} />
         <Route path="/departments" element={<Department />} />
+        <Route path="/committee" element={<CommitteeList />} />
       </Routes>
     </Router>
   )

@@ -1,0 +1,36 @@
+.committee-list-page h1 {
+    text-align: center;
+    color: white;
+}
+
+.committee-box {
+    width: 80%;
+    border-radius: 10px;
+    background-color: var(--dark-red);
+    margin: 2vh auto;
+    height: fit-content;
+    padding: 2vh 3vw;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.committee-box h1 {
+    text-align: left;
+}
+
+.committee-box button {
+    height: fit-content;
+    width: fit-content;
+    padding: 1vh 3vw;
+    background-color: rgb(149, 255, 149);
+    font-size: 16px;
+    border: none;
+    outline: none;
+    cursor: pointer;
+    box-shadow: 0px 0px 5px black;
+}
+
+.committee-box button:hover {
+    background-color: rgb(112, 222, 112);
+}
