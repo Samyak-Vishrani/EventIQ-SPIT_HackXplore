@@ -15,10 +15,14 @@ import AdbIcon from '@mui/icons-material/Adb';
 import notif from '../assets/notif.svg';
 import announce from '../assets/announce.svg';
 import profile from '../assets/profile.svg';
+import { useNavigate } from 'react-router-dom';
 
 const pages = ['Notification', 'Announcements'];
 
-function ResponsiveAppBar() {
+const ResponsiveAppBar = () => {
+
+    const navigate = useNavigate();
+
     const [anchorElNav, setAnchorElNav] = React.useState(null);
     const [anchorElUser, setAnchorElUser] = React.useState(null);
 
@@ -36,6 +40,10 @@ function ResponsiveAppBar() {
     const handleCloseUserMenu = () => {
         setAnchorElUser(null);
     };
+
+    const handleCreateEvent = () => {
+        navigate("/eventform");
+    }
 
     return (
         <AppBar position="static">
@@ -114,7 +122,7 @@ function ResponsiveAppBar() {
                     </Typography>
                     <Box sx={{ gap: '10px', display: 'flex', alignItems: 'center', width: 'fit-content', marginLeft: 'auto', display: { xs: 'none', md: 'flex' } }}>
 
-                        <button style={{ height: 'fit-content', padding: '1vh 1vw', background:'var(--dark-red)', color:'white', border:'none', outline:'none' }}>Create new Event</button>
+                        <button style={{ height: 'fit-content', padding: '1vh 1vw', background:'var(--dark-red)', color:'white', border:'none', outline:'none', cursor:'pointer' }} onClick={handleCreateEvent} >Create new Event</button>
 
                         <select style={{ height: 'fit-content', padding: '1vh 1vw', background:'var(--dark-red)', color:'white', border:'none', outline:'none' }}>
                             <option>Switch Event</option>

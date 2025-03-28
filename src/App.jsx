@@ -6,6 +6,7 @@ import AssignTask from "./pages/AssignTask";
 import Checklist from "./pages/Checklist";
 import Department from "./pages/Department";
 import CommitteeList from "./components/CommitteeList";
+import EventCreationForm from "./pages/EventCreationForm";
 
 function App() {
 
@@ -19,6 +20,7 @@ function App() {
         <Route path="/checklist" element={<Checklist />} />
         <Route path="/departments" element={<Department />} />
         <Route path="/committee" element={<CommitteeList />} />
+        <Route path="/eventform" element={<EventCreationForm />} />
       </Routes>
     </Router>
   )
