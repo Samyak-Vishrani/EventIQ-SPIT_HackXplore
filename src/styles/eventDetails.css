@@ -21,7 +21,7 @@
     width: 90%;
     max-width: 600px;
     margin: 2rem auto;
-    background: linear-gradient(135deg, #2c3e50, #34495e);
+    background: var(--dark-gray);
     border-radius: 12px;
     overflow: hidden;
     box-shadow: 0 10px 25px rgba(0, 0, 0, 0.2);
@@ -79,8 +79,8 @@
 
 .event-posters {
     padding: 20px;
-    border: 1px solid red;
     margin-top: 30px;
+    border-top: 2px solid rgb(255, 255, 255);
 }
 
 .event-posters h2{

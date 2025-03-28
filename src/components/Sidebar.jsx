@@ -1,5 +1,5 @@
 import * as React from 'react';
-import { useState } from 'react';
+import { useState, useCallback } from 'react';
 import Box from '@mui/material/Box';
 import Drawer from '@mui/material/Drawer';
 import List from '@mui/material/List';
@@ -8,15 +8,62 @@ import ListItem from '@mui/material/ListItem';
 import ListItemButton from '@mui/material/ListItemButton';
 import ListItemText from '@mui/material/ListItemText';
 import Typography from '@mui/material/Typography';
+import { useNavigate, useLocation } from 'react-router-dom';
 
 const Sidebar = () => {
-    // State to track the active/selected button
-    const [activeButton, setActiveButton] = useState('Event details');
+    const navigate = useNavigate();
+    const location = useLocation();
 
-    // Function to handle button click and update active state
-    const handleButtonClick = (text) => {
-        setActiveButton(text);
+    // Initialize active button based on current route
+    const getInitialActiveButton = () => {
+        const path = location.pathname;
+        switch (path) {
+            case '/dashboard':
+                return 'Event details';
+            case '/assigntask':
+                return 'Assign Task';
+            case '/checklist':
+                return 'Checklist';
+            case '/departments':
+                return 'Departments';
+            case '/sponsorship':
+                return 'Sponsorship';
+            case '/highlights':
+                return 'Highlights';
+            default:
+                return 'Event details';
+        }
     };
+
+    // State to track the active/selected button
+    const [activeButton, setActiveButton] = useState(getInitialActiveButton());
+
+    // Memoized function to handle button click
+    const handleButtonClick = useCallback((text) => {
+        setActiveButton(text);
+        switch (text) {
+            case "Assign Task":
+                navigate("/assigntask");
+                break;
+            case "Event details":
+                navigate("/dashboard");
+                break;
+            case "Checklist":
+                navigate("/checklist");
+                break;
+            case "Departments":
+                navigate("/departments");
+                break;
+            case "Sponsorship":
+                navigate("/sponsorship");
+                break;
+            case "Highlights":
+                navigate("/highlights");
+                break;
+            default:
+                break;
+        }
+    }, [navigate]);
 
     const list = () => (
         <Box

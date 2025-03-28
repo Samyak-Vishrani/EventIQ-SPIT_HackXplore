@@ -20,7 +20,7 @@ const AssignTask = () => {
                     <button>Assign</button>
                 </div>
 
-                <p>Simply assign your task, and we’ll automatically allocate it to the most suitable department based on its role.<br/><br/> If multiple departments can handle the task, priority will be given to the one with the least workload.<br/><br/> To track your assigned tasks, visit the Departments section.</p>
+                <p>Simply assign your task, and we’ll automatically allocate it to the most suitable department based on its role.<br/><br/> If multiple departments can handle the task, priority will be given to the one with the least workload.<br/><br/> To track your assigned tasks, visit the Checklist section.</p>
             </div>
         </div>
     )

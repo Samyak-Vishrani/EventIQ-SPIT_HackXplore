@@ -2,9 +2,11 @@
   font-family: system-ui, Avenir, Helvetica, Arial, sans-serif;
 
   --bg-color: #040f1a;
-  --dark-red: #2c3e50;
+  --dark-gray: #1C2128;
+  --dark-red: #2c3e50; 
   --light-red: #f5d6a8;
   --light-grey: #EEEEEE;
+  --yellow: rgba(246, 255, 0, 0.724);
 
 }
 

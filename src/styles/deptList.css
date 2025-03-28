@@ -1,0 +1,52 @@
+.dept-list-container{
+    width: calc(100% - 250px);
+    height: calc(100vh - 75px);
+    background-color: var(--bg-color);
+    position: absolute;
+    z-index: 500;
+    left: 250px;
+    top: 75px;
+    overflow-y: scroll;
+}
+
+.dept-list-container h1 {
+    color: white;
+    text-align: center;
+    line-height: 0;
+    margin-bottom: 70px;
+}
+
+.dept-list-container .com-name {
+    color: var(--yellow);
+    text-align: center;
+}
+
+.dept-list-container .card {
+    width: 80%;
+    border-radius: 10px;
+    background-color: var(--dark-red);
+    margin: 2vh auto;
+    height: fit-content;
+}
+
+.dept-list-container .card .card-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    box-sizing: border-box;
+    padding: 0vh 2vw;
+}
+
+.dept-list-container .card .card-header h2 {
+    color: white;
+}
+
+.dept-list-container .card .card-header p {
+    background-color: var(--light-red);
+    padding: 1vh 1vw;
+    border-radius: 5px;
+    display: flex;
+    align-items: center;
+    gap: 5px;
+    font-weight: 500;
+}
