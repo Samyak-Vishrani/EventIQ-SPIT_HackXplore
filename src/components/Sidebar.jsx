@@ -21,11 +21,12 @@ const Sidebar = () => {
     const list = () => (
         <Box
             sx={{
-                width: 250,
+                width: '250px',
                 height: '100%',
                 overflowY: 'auto',
                 background: 'black',
                 color: 'white',
+                boxSizing:'border-box'
             }}
             role="presentation"
         >

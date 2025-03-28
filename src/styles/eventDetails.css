@@ -1,0 +1,111 @@
+.event-details-page {
+    width: calc(100% - 250px);
+    height: calc(100vh - 75px);
+    background-color: var(--bg-color);
+    position: absolute;
+    z-index: 500;
+    left: 250px;
+    top: 75px;
+    overflow-y: scroll;
+}
+
+.event-details-page h1 {
+    text-align: center;
+    width: 100%;
+    background: radial-gradient(circle, rgba(0, 162, 255, 0.5),rgba(0, 105, 166, 0.5),rgba(0, 63, 100, 0.876),rgb(0, 39, 61), rgb(0, 15, 24), transparent);
+    height: 10vh;
+    color: white;
+}
+
+.event-info {
+    width: 90%;
+    max-width: 600px;
+    margin: 2rem auto;
+    background: linear-gradient(135deg, #2c3e50, #34495e);
+    border-radius: 12px;
+    overflow: hidden;
+    box-shadow: 0 10px 25px rgba(0, 0, 0, 0.2);
+    backdrop-filter: blur(10px);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.event-info tr {
+    transition: background-color 0.3s ease;
+}
+
+.event-info tr:hover {
+    background-color: rgba(255, 255, 255, 0.05);
+}
+
+.event-info td {
+    color: #e0e0e0;
+    padding: 15px 20px;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+    font-weight: 300;
+    line-height: 1.6;
+}
+
+.event-info tr:last-child td {
+    border-bottom: none;
+}
+
+.event-info td:first-child {
+    width: 35%;
+    font-weight: 500;
+    opacity: 0.8;
+}
+
+.event-info strong {
+    color: #ffd700;
+    font-size: 1rem;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    display: block;
+    margin-bottom: 5px;
+}
+
+/* Responsive adjustments */
+@media (max-width: 600px) {
+    .event-info {
+        width: 95%;
+        margin: 1rem auto;
+    }
+    
+    .event-info td {
+        padding: 12px 15px;
+    }
+}
+
+
+.event-posters {
+    padding: 20px;
+    border: 1px solid red;
+    margin-top: 30px;
+}
+
+.event-posters h2{
+    color: white;
+    text-align: center;
+}
+
+.poster-container {
+    display: flex;
+    gap: 15px;
+    flex-wrap: wrap;
+}
+
+.poster-container img {
+    width: 200px;
+    height: auto;
+    border-radius: 10px;
+    box-shadow: 2px 2px 10px rgba(0, 0, 0, 0.2);
+
+}
+
+.event-details-section {
+    padding: 20px;
+}
+
+.event-details-section h2 {
+    margin-bottom: 10px;
+}
