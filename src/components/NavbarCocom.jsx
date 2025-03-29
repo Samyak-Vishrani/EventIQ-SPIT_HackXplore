@@ -8,19 +8,11 @@ import Menu from '@mui/material/Menu';
 import MenuIcon from '@mui/icons-material/Menu';
 import Container from '@mui/material/Container';
 import Tooltip from '@mui/material/Tooltip';
-import MenuItem from '@mui/material/MenuItem';
 import AdbIcon from '@mui/icons-material/Adb';
 import notif from '../assets/notif.svg';
-import announce from '../assets/announce.svg';
 import profile from '../assets/profile.svg';
-import { useNavigate } from 'react-router-dom';
 
-const pages = ['Notification', 'Announcements'];
-
-const ResponsiveAppBar = () => {
-
-    const navigate = useNavigate();
-
+const NavbarCocom = () => {
     const [anchorElNav, setAnchorElNav] = React.useState(null);
     const [anchorElUser, setAnchorElUser] = React.useState(null);
 
@@ -39,13 +31,9 @@ const ResponsiveAppBar = () => {
         setAnchorElUser(null);
     };
 
-    const handleCreateEvent = () => {
-        navigate("/eventform");
-    }
-
     return (
         <AppBar position="static">
-            <Container maxWidth="xl" sx={{ background: 'black', height: '75px' }} >
+            <Container maxWidth="xl" sx={{ background: 'black', height: '75px' }}>
                 <Toolbar disableGutters>
                     <Typography
                         variant="h6"
@@ -62,7 +50,7 @@ const ResponsiveAppBar = () => {
                             textDecoration: 'none',
                         }}
                     >
-                        LOGO
+                        NEW LOGO
                     </Typography>
 
                     <Box sx={{ flexGrow: 1, display: { xs: 'flex', md: 'none' } }}>
@@ -91,13 +79,7 @@ const ResponsiveAppBar = () => {
                             open={Boolean(anchorElNav)}
                             onClose={handleCloseNavMenu}
                             sx={{ display: { xs: 'block', md: 'none' } }}
-                        >
-                            {pages.map((page) => (
-                                <MenuItem key={page} onClick={handleCloseNavMenu}>
-                                    <Typography sx={{ textAlign: 'center' }}>{page}</Typography>
-                                </MenuItem>
-                            ))}
-                        </Menu>
+                        ></Menu>
                     </Box>
                     <AdbIcon sx={{ display: { xs: 'flex', md: 'none' }, mr: 1 }} />
                     <Typography
@@ -116,41 +98,29 @@ const ResponsiveAppBar = () => {
                             textDecoration: 'none',
                         }}
                     >
-                        LOGO
+                        NEW LOGO
                     </Typography>
-                    <Box sx={{ gap: '10px', display: 'flex', alignItems: 'center', width: 'fit-content', marginLeft: 'auto', display: { xs: 'none', md: 'flex' } }}>
+                    <Box sx={{ display: 'flex', alignItems: 'center', marginLeft: 'auto' }}>
 
-                        <button style={{ height: 'fit-content', padding: '1vh 1vw', background:'var(--dark-red)', color:'white', border:'none', outline:'none', cursor:'pointer' }} onClick={handleCreateEvent} >Create new Event</button>
-
-                        <select style={{ height: 'fit-content', padding: '1vh 1vw', background:'var(--dark-red)', color:'white', border:'none', outline:'none' }}>
+                        <select style={{ height: 'fit-content', padding: '1vh 1vw', background: 'var(--dark-red)', color: 'white', border: 'none', outline: 'none' }}>
                             <option>Switch Event</option>
                         </select>
-
-                        <button
+                        <IconButton
                             onClick={handleCloseNavMenu}
-                            style={{ my: 2, color: 'white', display: 'block', background:'black', border:'none', outline:'none'  }}
+                            sx={{ color: 'white', background: 'black', border: 'none', outline: 'none', marginRight: '10px' }}
                         >
-                            <img src={announce} />
-                        </button>
-                        <button
-                            onClick={handleCloseNavMenu}
-                            style={{ width:'fit-content', my: 2, color: 'white', display: 'block', background:'black', border:'none', outline:'none', marginRight:'10px' }}
-                        >
-                            <img src={notif} />
-                        </button>
-
-                    </Box>
-                    <Box sx={{ flexGrow: 0 }}>
-                        <Tooltip title="view profile">
-                            <IconButton onClick={handleOpenUserMenu} sx={{ p: 0, marginLeft:'10px' }}>
-                                <img src={profile} />
+                            <img src={notif} alt="Notifications" />
+                        </IconButton>
+                        <Tooltip title="View Profile">
+                            <IconButton onClick={handleOpenUserMenu} sx={{ p: 0 }}>
+                                <img src={profile} alt="Profile" />
                             </IconButton>
                         </Tooltip>
-                        
                     </Box>
                 </Toolbar>
             </Container>
         </AppBar>
     );
 }
-export default ResponsiveAppBar;
+
+export default NavbarCocom;

@@ -7,6 +7,7 @@ import Checklist from "./pages/Checklist";
 import Department from "./pages/Department";
 import CommitteeList from "./components/CommitteeList";
 import EventCreationForm from "./pages/EventCreationForm";
+import DashboardCocom from "./pages/DashboardCocom";
 
 function App() {
 
@@ -21,6 +22,7 @@ function App() {
         <Route path="/departments" element={<Department />} />
         <Route path="/committee" element={<CommitteeList />} />
         <Route path="/eventform" element={<EventCreationForm />} />
+        <Route path="/dashboardcocom" element={<DashboardCocom />} />
       </Routes>
     </Router>
   )
