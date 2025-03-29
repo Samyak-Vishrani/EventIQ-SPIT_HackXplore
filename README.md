@@ -1,1 +1,0 @@
-EventIQ SPIT HackXplore
