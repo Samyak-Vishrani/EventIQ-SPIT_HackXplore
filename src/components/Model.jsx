@@ -1,21 +1,54 @@
-import React, { useState } from 'react';
-import "../styles/Model.css"
+import React, { useState, useEffect } from 'react';
+import "../styles/Model.css";
+import url from "../apis/urls";
+import Cookies from "js-cookie";
 
 const Modal = ({ committee, onClose }) => {
     const [showNewWindow, setShowNewWindow] = useState(false);
+    const [adminData, setAdminData] = useState({
+        email: "",
+        password: "",
+    });
+    const [joiningCode, setJoiningCode] = useState("");
 
-    const handleJoin = () => {
-        setShowNewWindow(true);
+    const handleChangeAdmin = (e) => {
+        setAdminData({ ...adminData, [e.target.name]: e.target.value });
     };
 
     const handleCloseNewWindow = () => {
         setShowNewWindow(false);
     };
 
-    const [joiningCode, setJoiningCode] = useState(null);
+    const handleAdminReq = () => {
+        if (adminData.email && adminData.password) {
+            fetch(`${url}/committee-member/admin/login`, {
+                method: "POST",
+                headers: { "Content-Type": "application/json" },
+                body: JSON.stringify(adminData),
+            })
+                .then(response => response.json())
+                .then(data => {
 
-    const handleJoiningCode = (e) => {
-        setJoiningCode(e.target.value);
+                    console.log("Admin response:", data);
+                })
+                .catch(error => console.error("Error joining admin:", error));
+        }
+    }
+
+    const handleCocomReq = () => {
+        if (joiningCode) {
+            fetch(`${url}/committee-member/cocom/login`, {
+                method: "POST",
+                headers: { "Content-Type": "application/json" },
+                body: JSON.stringify({ "userId": Cookies.get("userId"), joiningCode }),
+            })
+                .then(response => response.json())
+                .then(data => {
+                    setShowNewWindow(true);
+                    console.log("Co-com response:", data)
+                })
+                .catch(error => console.error("Error joining co-com:", error));
+        }
     }
 
     return (
@@ -27,57 +60,55 @@ const Modal = ({ committee, onClose }) => {
                         <div className="join-container">
                             <div className="card">
                                 <h1 style={{ color: 'white' }}>Join as Admin</h1>
-                                <input type="email" placeholder="Enter Committee Email" required />
-                                <input type="password" placeholder="Enter Password" required />
-                                <button>Join</button>
+
+                                <input type="email" name="email" placeholder="Enter Committee Email" required onChange={handleChangeAdmin} value={adminData.email} />
+
+                                <input type="password" name="password" placeholder="Enter Password" required onChange={handleChangeAdmin} value={adminData.password} />
+
+                                <button onClick={handleAdminReq}>Join</button>
                             </div>
                             <div className="card">
                                 <h1 style={{ color: 'white' }}>Join as Co-com</h1>
-                                <input type="email" placeholder="Enter Joining Code" required onChange={handleJoiningCode} />
-                                <button onClick={handleJoin}>Join</button>
+                                <input type="text" placeholder="Enter Joining Code" required onChange={(e) => setJoiningCode(e.target.value)} value={joiningCode} />
+                                <button onClick={handleCocomReq}>Join</button>
                             </div>
                         </div>
                     </div>
                 </div>
             </div>
-
             {showNewWindow && <NewWindow onClose={handleCloseNewWindow} joiningCode={joiningCode} />}
         </>
     );
 };
 
 const NewWindow = ({ onClose, joiningCode }) => {
-
-    const [dept, setDept] = useState(["Creatives", "Technical", "Logistics", "Editorial", "Creatives", "Technical", "Logistics", "Editorial"]);
+    const [dept, setDept] = useState(["Creatives", "Technical", "Logistics", "Editorial"]);
     const [selectedOption, setSelectedOption] = useState(null);
 
-    // use this joining code to fetch the departments
+    useEffect(() => {
+        fetch(`${url}/localhost:3000/committee/joiningCode/${joiningCode}/departments`)
+            .then((res) => res.json())
+            .then((data) => console.log(data.departments[0]));
+    }, [])
 
     return (
         <div className="modal-backdrop">
             <div className="modal-overlay">
-                <div className="modal-content" style={{width:'600px'}}>
+                <div className="modal-content" style={{ width: '600px' }}>
                     <span className="close-button" onClick={onClose}>X</span>
                     <div className="join-container" style={{ flexDirection: 'column' }}>
-
                         <h1 style={{ color: 'white' }}>Select Department</h1>
                         <div className="options-container">
-                            {
-                                dept.map(option => {
-                                    return <div
-                                        onClick={() => setSelectedOption(option)}
-                                        className={`option ${selectedOption === option ? "selected" : ""}`}
-                                    >
-
-                                        <div className="content">
-                                            <h3 className="label">{option}</h3>
-                                        </div>
-                                        <div className="radio">
-                                            {selectedOption === option && <div className="radio-inner"></div>}
-                                        </div>
+                            {dept.map(option => (
+                                <div key={option} onClick={() => setSelectedOption(option)} className={`option ${selectedOption === option ? "selected" : ""}`}>
+                                    <div className="content">
+                                        <h3 className="label">{option}</h3>
                                     </div>
-                                })
-                            }
+                                    <div className="radio">
+                                        {selectedOption === option && <div className="radio-inner"></div>}
+                                    </div>
+                                </div>
+                            ))}
                         </div>
                     </div>
                 </div>
