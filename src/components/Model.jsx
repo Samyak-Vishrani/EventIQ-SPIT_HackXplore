@@ -2,8 +2,11 @@ import React, { useState, useEffect } from 'react';
 import "../styles/Model.css";
 import url from "../apis/urls";
 import Cookies from "js-cookie";
+import { useNavigate } from 'react-router-dom';
 
 const Modal = ({ committee, onClose }) => {
+    const navigate = useNavigate();
+
     const [showNewWindow, setShowNewWindow] = useState(false);
     const [adminData, setAdminData] = useState({
         email: "",
@@ -30,6 +33,10 @@ const Modal = ({ committee, onClose }) => {
                 .then(data => {
 
                     console.log("Admin response:", data);
+                    if(data.message === "Login successful") {
+                        navigate("/dashboard");   
+                    }
+
                 })
                 .catch(error => console.error("Error joining admin:", error));
         }
@@ -82,14 +89,17 @@ const Modal = ({ committee, onClose }) => {
 };
 
 const NewWindow = ({ onClose, joiningCode }) => {
-    const [dept, setDept] = useState(["Creatives", "Technical", "Logistics", "Editorial"]);
+    const [dept, setDept] = useState([]);
     const [selectedOption, setSelectedOption] = useState(null);
 
     useEffect(() => {
-        fetch(`${url}/localhost:3000/committee/joiningCode/${joiningCode}/departments`)
+        fetch(`${url}/committee/joiningCode/${joiningCode}/departments`)
             .then((res) => res.json())
-            .then((data) => console.log(data.departments[0]));
-    }, [])
+            .then((data) => {
+                setDept(data.departments);
+                console.log(data.departments);
+    });
+    }, []);
 
     return (
         <div className="modal-backdrop">
@@ -100,12 +110,12 @@ const NewWindow = ({ onClose, joiningCode }) => {
                         <h1 style={{ color: 'white' }}>Select Department</h1>
                         <div className="options-container">
                             {dept.map(option => (
-                                <div key={option} onClick={() => setSelectedOption(option)} className={`option ${selectedOption === option ? "selected" : ""}`}>
+                                <div key={option._id} onClick={() => setSelectedOption(option.dept_name)} className={`option ${selectedOption === option.dept_name ? "selected" : ""}`}>
                                     <div className="content">
-                                        <h3 className="label">{option}</h3>
+                                        <h3 className="label">{option.dept_name}</h3>
                                     </div>
                                     <div className="radio">
-                                        {selectedOption === option && <div className="radio-inner"></div>}
+                                        {selectedOption === option.dept_name && <div className="radio-inner"></div>}
                                     </div>
                                 </div>
                             ))}
