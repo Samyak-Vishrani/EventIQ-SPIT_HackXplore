@@ -60,7 +60,7 @@ const Intro = () => {
           <div className="search-bar">
             <input
               type="text"
-              placeholder="Search events, committees, venues..."
+              placeholder="Search events or committees"
               value={searchTerm}
               onChange={handleSearchChange}
             />

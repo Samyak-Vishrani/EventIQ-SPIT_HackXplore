@@ -74,7 +74,7 @@
 
 .search-bar .search-icon {
     position: absolute;
-    right: 0.8rem;
+    right: 0.4rem;
     top: 50%;
     transform: translateY(-50%);
     color: var(--light-grey);
@@ -161,7 +161,7 @@
 .events-table th {
     padding: 1rem;
     font-weight: 500;
-    color: var(--light-red);
+    color: var(--light-grey);
     border-bottom: 2px solid #2a3543;
     font-weight: 600;
 }
@@ -178,6 +178,11 @@
 .events-table {
     font-weight: 500;
     color: var(--light-grey);
+}
+
+.events-table .event-name {
+    font-weight: 500;
+    color: var(--light-red);
 }
 
 .status-badge {
