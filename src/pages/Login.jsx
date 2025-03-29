@@ -1,13 +1,12 @@
 import React, { useState } from "react";
 import "../styles/Login.css";
+import url from "../apis/urls";
 
 const Login = () => {
   const [formData, setFormData] = useState({
     email: "",
     password: ""
   });
-
-  const url = "http://localhost:3000";
 
   const handleChange = (e) => {
     const { name, value } = e.target;

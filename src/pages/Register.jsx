@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import "../styles/Register.css";
+import url from "../apis/urls";
 
 const Register = () => {
   const [formData, setFormData] = useState({
@@ -7,8 +8,6 @@ const Register = () => {
     password: "",
     confirmPassword: ""
   });
-
-  const url = "http://localhost:3000";
 
   const handleChange = (e) => {
     const { name, value } = e.target;
