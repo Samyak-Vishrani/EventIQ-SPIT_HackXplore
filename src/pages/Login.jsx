@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import Cookies from "js-cookie";
 import "../styles/Login.css";
 import url from "../apis/urls";
 
@@ -30,7 +31,10 @@ const Login = () => {
       });
       
       const data = await response.json();
-      console.log(data);
+      if (data.user && data.user._id) {
+        Cookies.set("userId", data.user._id, { expires: 7 }); // Store user ID in cookies for 7 days
+        console.log("User ID stored in cookies:", data.user._id);
+      }
       // Handle successful login here (e.g., store token, redirect)
     } catch (error) {
       console.error("Error:", error);
