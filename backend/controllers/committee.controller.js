@@ -1,9 +1,22 @@
 import Committee from "../models/committee.model.js";
 import CommitteeMember from "../models/committee.member.model.js";
+import bcrypt from "bcryptjs";
 
 export const createCommittee = async (req, res) => {
   try {
-    const committee = new Committee(req.body);
+    const { name, email, password, joiningCode } = req.body;
+
+    // Hash the password before saving
+    const salt = await bcrypt.genSalt(10);
+    const hashedPassword = await bcrypt.hash(password, salt);
+
+    const committee = new Committee({
+      name,
+      email,
+      password: hashedPassword, // Store hashed password
+      joiningCode,
+    });
+
     await committee.save();
     res.status(201).json(committee);
   } catch (err) {

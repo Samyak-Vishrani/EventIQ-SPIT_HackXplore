@@ -1,5 +1,6 @@
 import Department from "../models/department.model.js";
-import Notification from "../models/notification.model.js";
+import CommitteeMember from "../models/committee.member.model.js";
+import { createNotification } from "../controllers/notification.controller.js";
 
 // Create a Department
 export const createDepartment = async (req, res) => {

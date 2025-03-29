@@ -5,7 +5,9 @@ import {
   getAllCommitteeMembers,
   getCommitteeMemberById,
   updateCommitteeMember,
-  deleteCommitteeMember
+  deleteCommitteeMember,
+  adminLogin,
+  cocomLogin
 } from "../controllers/committee.member.controller.js";
 
 const router = express.Router();
@@ -15,5 +17,7 @@ router.get("/", authMiddleware, getAllCommitteeMembers);  // Get All Committee M
 router.get("/:id", authMiddleware, getCommitteeMemberById);  // Get Single Committee Member
 router.put("/:id", authMiddleware, updateCommitteeMember);  // Update Committee Member
 router.delete("/:id", authMiddleware, deleteCommitteeMember);  // Delete Committee Member
+router.post("/admin/login", adminLogin); // Admin (Committee Head) Login Route
+router.post("/cocom/login", cocomLogin); // CoCom (Committee Member) Login Route
 
 export default router;
