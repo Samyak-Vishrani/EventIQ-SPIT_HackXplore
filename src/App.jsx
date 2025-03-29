@@ -8,21 +8,30 @@ import Department from "./pages/Department";
 import CommitteeList from "./components/CommitteeList";
 import EventCreationForm from "./pages/EventCreationForm";
 import DashboardCocom from "./pages/DashboardCocom";
+import DepartmentCocom from "./pages/DepartmentCocom";
 
 function App() {
 
   return (
     <Router>
       <Routes>
+
         <Route path="/dashboard" element={<Dashboard />} />
+        <Route path="/dashboardcocom" element={<DashboardCocom />} />
+
         <Route path="/login" element={<Login />} />
         <Route path="/register" element={<Register />} />
+
+        // for admins 
         <Route path="/assigntask" element={<AssignTask />} />
         <Route path="/checklist" element={<Checklist />} />
         <Route path="/departments" element={<Department />} />
-        <Route path="/committee" element={<CommitteeList />} />
         <Route path="/eventform" element={<EventCreationForm />} />
-        <Route path="/dashboardcocom" element={<DashboardCocom />} />
+
+        <Route path="/yourdepartment" element={<DepartmentCocom />} />
+
+        <Route path="/committee" element={<CommitteeList />} />
+        
       </Routes>
     </Router>
   )

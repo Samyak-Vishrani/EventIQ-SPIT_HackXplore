@@ -34,7 +34,7 @@ const Modal = ({ committee, onClose }) => {
 
                     console.log("Admin response:", data);
                     if(data.message === "Login successful") {
-                        navigate("/dashboard");   
+                        navigate("/dashboard");
                     }
 
                 })
@@ -51,8 +51,9 @@ const Modal = ({ committee, onClose }) => {
             })
                 .then(response => response.json())
                 .then(data => {
-                    setShowNewWindow(true);
                     console.log("Co-com response:", data)
+                    Cookies.set("joining-code", joiningCode, {expires: 7});
+                    setShowNewWindow(true);
                 })
                 .catch(error => console.error("Error joining co-com:", error));
         }
@@ -89,6 +90,8 @@ const Modal = ({ committee, onClose }) => {
 };
 
 const NewWindow = ({ onClose, joiningCode }) => {
+    const navigate = useNavigate();
+
     const [dept, setDept] = useState([]);
     const [selectedOption, setSelectedOption] = useState(null);
 
@@ -100,6 +103,15 @@ const NewWindow = ({ onClose, joiningCode }) => {
                 console.log(data.departments);
     });
     }, []);
+
+    const handleProceed = () => {
+        if(selectedOption) {
+            Cookies.set("department-cocom", selectedOption, {expires: 7})
+            navigate("/dashboardcocom");
+        } else {
+            alert("Please Select department to proceed");
+        }
+    }
 
     return (
         <div className="modal-backdrop">
@@ -120,6 +132,7 @@ const NewWindow = ({ onClose, joiningCode }) => {
                                 </div>
                             ))}
                         </div>
+                        <button onClick={handleProceed}>Proceed</button>
                     </div>
                 </div>
             </div>

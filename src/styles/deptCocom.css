@@ -1,0 +1,60 @@
+.dept-cocom-page {
+    width: calc(100% - 250px);
+    height: calc(100vh - 75px);
+    background-color: var(--bg-color);
+    position: absolute;
+    z-index: 500;
+    left: 250px;
+    top: 75px;
+    overflow-y: scroll;
+}
+
+.dept-cocom-page h1 {
+    color: white;
+    text-align: center;
+}
+
+.dept-cocom-page h2 {
+    color: rgb(136, 136, 136);
+    text-align: center;
+}
+
+.dept-cocom-page .task-list {
+    width: 80%;
+    background-color: var(--dark-gray);
+    margin: 2vh auto;
+    padding: 2vh;
+    border-radius: 10px;
+}
+
+.dept-cocom-page .task-list .task {
+    width: 80%;
+    border-radius: 10px;
+    background-color: var(--dark-red);
+    margin: 2vh auto;
+    height: fit-content;
+    padding-bottom: 3vh;
+    color: white;
+    font-size: 18px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 3vh 2vw;
+}
+
+.dept-cocom-page .task-list .task button {
+    padding: 1vh 1vw;
+    background-color: rgb(94, 221, 94);
+    border: none;
+    outline: none;
+    cursor: pointer;
+    box-shadow: 0px 0px 5px black;
+}
+
+.dept-cocom-page .task-list .task button:active {
+    box-shadow: 0px 0px 0px black;
+}
+
+.dept-cocom-page .task-list .task button:hover {
+    background-color: rgb(76, 188, 76);
+}

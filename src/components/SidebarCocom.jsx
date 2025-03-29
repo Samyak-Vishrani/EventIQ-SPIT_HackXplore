@@ -33,7 +33,7 @@ const SidebarCocom = () => {
         setActiveButton(text);
         switch (text) {
             case "Event details":
-                navigate("/dashboard");
+                navigate("/dashboardcocom");
                 break;
             case "Your Department":
                 navigate("/yourdepartment");
