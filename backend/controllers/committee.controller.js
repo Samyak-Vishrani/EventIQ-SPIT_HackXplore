@@ -1,6 +1,7 @@
 import Committee from "../models/committee.model.js";
 import CommitteeMember from "../models/committee.member.model.js";
 import Department from "../models/department.model.js";
+import Event from "../models/event.model.js";
 import bcrypt from "bcryptjs";
 
 export const createCommittee = async (req, res) => {
@@ -81,6 +82,42 @@ export const getDepartmentsByJoiningCode = async (req, res) => {
     const departments = await Department.find({ committee: committee._id }).select("dept_name tasks");
 
     res.status(200).json({ committee, departments });
+  } catch (err) {
+    res.status(500).json({ error: err.message });
+  }
+};
+
+// Fetch Events by Committee ID
+export const getEventsByCommitteeId = async (req, res) => {
+  try {
+    const { committeeId } = req.params;
+
+    // Check if committee exists
+    const committee = await Committee.findById(committeeId);
+    if (!committee) return res.status(404).json({ error: "Committee not found" });
+
+    // Fetch all events for the given committee
+    const events = await Event.find({ committee: committeeId });
+
+    res.status(200).json({ committee, events });
+  } catch (err) {
+    res.status(500).json({ error: err.message });
+  }
+};
+
+// Fetch Events by Joining Code
+export const getEventsByJoiningCode = async (req, res) => {
+  try {
+    const { joiningCode } = req.params;
+
+    // Find committee by joining code
+    const committee = await Committee.findOne({ joiningCode });
+    if (!committee) return res.status(404).json({ error: "Invalid joining code" });
+
+    // Fetch all events for the found committee
+    const events = await Event.find({ committee: committee._id });
+
+    res.status(200).json({ committee, events });
   } catch (err) {
     res.status(500).json({ error: err.message });
   }
