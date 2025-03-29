@@ -5,10 +5,10 @@ const committeeMemberSchema = new mongoose.Schema({
   //   type: String, 
   //   required: true 
   // },
-  department: { 
-    type: String, 
-    required: true, 
-  },
+  // department: { 
+  //   type: String, 
+  //   required: true, 
+  // },
   committee: [{ 
     type: mongoose.Schema.Types.ObjectId, 
     ref: "Committee", 
@@ -22,7 +22,7 @@ const committeeMemberSchema = new mongoose.Schema({
   department:{
     type: mongoose.Schema.Types.ObjectId,
     ref: "Department",
-    required: true,
+    // required: true,
   },
   role:{
     type: String,
