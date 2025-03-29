@@ -1,6 +1,13 @@
 import express from "express";
 import authMiddleware from "../middlewares/auth.middleware.js";
-import { createDepartment, getAllDepartments, getDepartmentById, updateDepartment, deleteDepartment, appendTaskToDepartment } from "../controllers/department.controller.js";
+import {createDepartment,
+        getAllDepartments, 
+        getDepartmentById, 
+        updateDepartment, 
+        deleteDepartment, 
+        appendTaskToDepartment,
+    } 
+from "../controllers/department.controller.js";
 
 const router = express.Router();
 
