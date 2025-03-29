@@ -52,7 +52,7 @@ export const deleteCommittee = async (req, res) => {
   }
 };
 
-export const getDepartments = async (req, res) => {
+export const getDepartmentsByCommitteeId = async (req, res) => {
   try {
     const { committeeId } = req.params; // Get committee ID from request params
 
@@ -62,6 +62,23 @@ export const getDepartments = async (req, res) => {
 
     // Fetch all departments linked to the committee
     const departments = await Department.find({ committee: committeeId }).select("dept_name tasks");
+
+    res.status(200).json({ committee, departments });
+  } catch (err) {
+    res.status(500).json({ error: err.message });
+  }
+};
+
+export const getDepartmentsByJoiningCode = async (req, res) => {
+  try {
+    const { joiningCode } = req.params; // Get joining code from request params
+
+    // Find the committee using the joining code
+    const committee = await Committee.findOne({ joiningCode });
+    if (!committee) return res.status(404).json({ error: "Invalid joining code" });
+
+    // Fetch all departments associated with the found committee
+    const departments = await Department.find({ committee: committee._id }).select("dept_name tasks");
 
     res.status(200).json({ committee, departments });
   } catch (err) {

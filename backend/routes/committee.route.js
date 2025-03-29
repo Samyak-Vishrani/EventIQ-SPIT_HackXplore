@@ -4,7 +4,8 @@ import {
   getAllCommittees,
   updateCommittee,
   deleteCommittee,
-  getDepartments,
+  getDepartmentsByCommitteeId,
+  getDepartmentsByJoiningCode,
 } from "../controllers/committee.controller.js";
 import authmiddleware from "../middlewares/auth.middleware.js";
 
@@ -22,6 +23,7 @@ router.patch("/:id", updateCommittee);
 // Delete a committee by ID
 router.delete("/:id", deleteCommittee);
 
-router.get("/:committeeId/departments", getDepartments);
+router.get("/committeeId/:committeeId/departments", getDepartmentsByCommitteeId);
+router.get("/joiningCode/:joiningCode/departments", getDepartmentsByJoiningCode);
 
 export default router;
