@@ -65,3 +65,19 @@ export const deleteEvent = async (req, res) => {
     res.status(500).json({ error: err.message });
   }
 };
+
+// Get all participants of an event using Event ID
+export const getParticipants = async (req, res) => {
+  try {
+    const { eventId } = req.params;
+
+    // Find event and populate participants
+    const event = await Event.findById(eventId).populate("participants", "name email");
+
+    if (!event) return res.status(404).json({ error: "Event not found" });
+
+    res.status(200).json({ event_name: event.event_name, participants: event.participants });
+  } catch (err) {
+    res.status(500).json({ error: err.message });
+  }
+};
