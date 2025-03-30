@@ -4,8 +4,8 @@ import { getUserNotifications, markNotificationAsRead, deleteNotification } from
 
 const router = express.Router();
 
-router.get("/notifications", authmiddleware, getUserNotifications);
-router.patch("/notifications/:id/read", authmiddleware, markNotificationAsRead);
-router.delete("/notifications/:id", authmiddleware, deleteNotification);
+router.get("/notifications", getUserNotifications);
+router.patch("/notifications/:id/read", markNotificationAsRead);
+router.delete("/notifications/:id", deleteNotification);
 
 export default router;
