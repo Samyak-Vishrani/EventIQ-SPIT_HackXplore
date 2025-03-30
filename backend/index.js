@@ -41,6 +41,7 @@ import committeeRoute from "./routes/committee.route.js";
 import committeeMemberRoute from "./routes/committee.member.route.js";
 import eventRoute from "./routes/event.route.js";
 import departmentRoute from "./routes/department.route.js";
+import checklistRoute from "./routes/checklist.route.js";
 
 //creating routes
 app.get("/",(req,res)=>{res.send('Home')})
@@ -49,6 +50,7 @@ app.use("/committee" , committeeRoute);
 app.use("/committee-member" , committeeMemberRoute);
 app.use("/event" , eventRoute);
 app.use("/department" , departmentRoute);
+app.use("/checklist" , checklistRoute);
 
 //launching the server
 app.listen(3000, () => {
