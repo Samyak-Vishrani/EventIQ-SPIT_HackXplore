@@ -1,12 +1,4 @@
-/* Main CSS file with scoped classes */
-:root {
-    --bg-color: #040f1a;
-    --dark-gray: #1C2128;
-    --dark-red: #2c3e50;
-    --light-red: #f5d6a8;
-    --light-grey: #EEEEEE;
-    --yellow: rgba(246, 255, 0, 0.724);
-  }
+
   .poster-generator {
     width: calc(100% - 250px);
     height: calc(100vh - 75px);
@@ -168,6 +160,7 @@
     padding: 15px;
     margin-top: 30px;
     border-radius: 5px;
+    color: white;
   }
   
   .poster-generator .response-container {
@@ -176,6 +169,7 @@
     border-radius: 10px;
     padding: 20px;
     box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);
+    color: white;
   }
   
   .poster-generator .response-container h2 {

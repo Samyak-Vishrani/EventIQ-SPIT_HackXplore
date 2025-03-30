@@ -8,20 +8,34 @@ import ListItemButton from '@mui/material/ListItemButton';
 import ListItemText from '@mui/material/ListItemText';
 import Typography from '@mui/material/Typography';
 import { useNavigate, useLocation } from 'react-router-dom';
+import Cookies from "js-cookie";
 
 const SidebarCocom = () => {
     const navigate = useNavigate();
     const location = useLocation();
 
+    const [department, setDepartment] = React.useState("");
+
+    // Cookies.set("department-cocom", "creatives", {expires: 7})
+
+    React.useEffect(() => {
+        setDepartment(Cookies.get("department-cocom"))
+    }, [])
+
     const getInitialActiveButton = () => {
         const path = location.pathname;
         switch (path) {
             case '/dashboard':
+            case '/dashboardcocom':
                 return 'Event details';
             case '/yourdepartment':
                 return 'Your Department';
             case '/announcements':
                 return 'Announcements';
+            case '/postergen':
+                return 'Auto Posters';
+            case '/sponsorships':
+                return 'Sponsorships';
             default:
                 return 'Event details';
         }
@@ -41,10 +55,29 @@ const SidebarCocom = () => {
             case "Announcements":
                 navigate("/announcements");
                 break;
+            case "Auto Posters":
+                navigate("/postergen");
+                break;
+            case "Sponsorships":
+                navigate("/sponsorships");
+                break;
             default:
                 break;
         }
     }, [navigate]);
+
+    // Determine menu items based on department
+    const getMenuItems = () => {
+        const baseItems = ["Event details", "Your Department", "Announcements"];
+        
+        if (department === "creatives") {
+            return [...baseItems, "Auto Posters"];
+        } else if (department === "marketing") {
+            return [...baseItems, "Sponsorships"];
+        }
+        
+        return baseItems;
+    };
 
     const list = () => (
         <Box
@@ -73,7 +106,7 @@ const SidebarCocom = () => {
             </Box>
 
             <List sx={{ marginBottom: 2 }}>
-                {["Event details", "Your Department", "Announcements"].map((text) => (
+                {getMenuItems().map((text) => (
                     <ListItem key={text} disablePadding>
                         <ListItemButton
                             onClick={() => handleButtonClick(text)}

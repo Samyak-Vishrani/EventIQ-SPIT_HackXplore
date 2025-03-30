@@ -1,54 +1,58 @@
 import React, { useState } from 'react';
 import '../styles/posterGen.css';
 
-const PosterGen = () => {
+const PosterGenerator = () => {
+  // Initialize state with the exact structure needed by the API
   const [formData, setFormData] = useState({
     theme: {
-      name: '',
-      description: ''
+      name: "",
+      description: ""
     },
-    style: 'modern',
-    color_palette: ['#3A86FF', '#FF006E', '#8338EC'],
-    elements: [],
-    mood: 'joyful',
-    text_placement: 'center',
-    additional_notes: ''
+    style: "modern",
+    color_palette: ["#3A86FF", "#FF006E", "#8338EC"],
+    elements: ["people", "abstract", "animals"],
+    mood: "joyful",
+    text_placement: "center",
+    additional_notes: ""
   });
 
   const [isLoading, setIsLoading] = useState(false);
   const [response, setResponse] = useState(null);
   const [error, setError] = useState(null);
+  const [requestPayload, setRequestPayload] = useState(null);
+
+  const [imageURLS, setImageURLS] = useState([]);
 
   const styleOptions = [
-    { value: 'modern', label: 'Modern' },
-    { value: 'retro', label: 'Retro' },
-    { value: 'minimalist', label: 'Minimalist' },
-    { value: 'futuristic', label: 'Futuristic' },
-    { value: 'abstract', label: 'Abstract' }
+    { value: "modern", label: "Modern" },
+    { value: "retro", label: "Retro" },
+    { value: "minimalist", label: "Minimalist" },
+    { value: "futuristic", label: "Futuristic" },
+    { value: "abstract", label: "Abstract" }
   ];
 
   const elementOptions = [
-    { value: 'people', label: 'People' },
-    { value: 'abstract', label: 'Abstract Shapes' },
-    { value: 'animals', label: 'Animals' },
-    { value: 'technology', label: 'Technology' },
-    { value: 'nature', label: 'Nature' }
+    { value: "people", label: "People" },
+    { value: "abstract", label: "Abstract Shapes" },
+    { value: "animals", label: "Animals" },
+    { value: "technology", label: "Technology" },
+    { value: "nature", label: "Nature" }
   ];
 
   const moodOptions = [
-    { value: 'joyful', label: 'Joyful' },
-    { value: 'exciting', label: 'Exciting' },
-    { value: 'serious', label: 'Serious' },
-    { value: 'dramatic', label: 'Dramatic' },
-    { value: 'mysterious', label: 'Mysterious' }
+    { value: "joyful", label: "Joyful" },
+    { value: "exciting", label: "Exciting" },
+    { value: "serious", label: "Serious" },
+    { value: "dramatic", label: "Dramatic" },
+    { value: "mysterious", label: "Mysterious" }
   ];
 
   const textPlacementOptions = [
-    { value: 'center', label: 'Center' },
-    { value: 'top', label: 'Top' },
-    { value: 'bottom', label: 'Bottom' },
-    { value: 'left', label: 'Left' },
-    { value: 'right', label: 'Right' }
+    { value: "center", label: "Center" },
+    { value: "top", label: "Top" },
+    { value: "bottom", label: "Bottom" },
+    { value: "left", label: "Left" },
+    { value: "right", label: "Right" }
   ];
 
   const handleInputChange = (e) => {
@@ -80,53 +84,90 @@ const PosterGen = () => {
   };
 
   const handleElementsChange = (value) => {
+    let newElements;
+
     if (formData.elements.includes(value)) {
-      setFormData({
-        ...formData,
-        elements: formData.elements.filter(item => item !== value)
-      });
+      // Don't remove if it would make the array empty
+      newElements = formData.elements.filter(item => item !== value);
+      if (newElements.length === 0) {
+        return; // Don't update if it would create an empty array
+      }
     } else {
-      setFormData({
-        ...formData,
-        elements: [...formData.elements, value]
-      });
+      newElements = [...formData.elements, value];
     }
+
+    setFormData({
+      ...formData,
+      elements: newElements
+    });
   };
 
   const handleSubmit = async (e) => {
     e.preventDefault();
     setIsLoading(true);
     setError(null);
-    
+  
+    const payload = {
+      theme: {
+        name: formData.theme.name.trim(),
+        description: formData.theme.description.trim(),
+      },
+      style: formData.style,
+      color_palette: formData.color_palette,
+      elements: formData.elements,
+      mood: formData.mood,
+      text_placement: formData.text_placement,
+      additional_notes: formData.additional_notes.trim(),
+    };
+  
+    setRequestPayload(payload);
+    console.log("Sending payload:", payload);
+  
     try {
-      const response = await fetch('https://deepseekers-hackxplore-llm.onrender.com/generate-posters', {
-        method: 'POST',
+      const response = await fetch("https://deepseekers-hackxplore-llm.onrender.com/generate-posters", {
+        method: "POST",
         headers: {
-          'Content-Type': 'application/json',
+          "Content-Type": "application/json",
         },
-        body: JSON.stringify(formData),
+        body: JSON.stringify(payload),
       });
-      
+  
+      const responseText = await response.text(); // Read response body
+  
       if (!response.ok) {
-        throw new Error(`HTTP error! status: ${response.status}`);
+        let errorMessage = `Error ${response.status}: `;
+  
+        try {
+          const errorData = JSON.parse(responseText);
+          errorMessage += errorData.message || errorData.error || "Unknown error";
+        } catch (e) {
+          errorMessage += responseText || "Unknown error";
+        }
+  
+        throw new Error(errorMessage);
       }
-      
-      const data = await response.json();
+  
+      const data = JSON.parse(responseText);
       setResponse(data);
+  
+      if (data.variations) {
+        setImageURLS(data.variations.map((variation) => variation.url));
+      }
     } catch (error) {
-      console.error('Error:', error);
+      console.error("Error:", error);
       setError(error.message);
     } finally {
       setIsLoading(false);
     }
   };
+  
 
   return (
     <div className="poster-generator">
       <div className="container-1">
         <h1 className="title">AI Poster Generator</h1>
         <p className="subtitle">Create custom event posters in seconds</p>
-        
+
         <form onSubmit={handleSubmit}>
           <div className="form-section">
             <h2>Theme Information</h2>
@@ -142,7 +183,7 @@ const PosterGen = () => {
                 required
               />
             </div>
-            
+
             <div className="form-group">
               <label htmlFor="theme.description">Event Description</label>
               <textarea
@@ -155,7 +196,7 @@ const PosterGen = () => {
               />
             </div>
           </div>
-          
+
           <div className="form-section">
             <h2>Design Preferences</h2>
             <div className="form-group">
@@ -176,7 +217,7 @@ const PosterGen = () => {
                 ))}
               </div>
             </div>
-            
+
             <div className="form-group">
               <label>Color Palette</label>
               <div className="color-palette">
@@ -187,12 +228,12 @@ const PosterGen = () => {
                       value={color}
                       onChange={(e) => handleColorChange(index, e.target.value)}
                     />
-                    <span style={{color: 'white'}}>{color}</span>
+                    <span>{color}</span>
                   </div>
                 ))}
               </div>
             </div>
-            
+
             <div className="form-group">
               <label>Visual Elements</label>
               <div className="checkbox-group">
@@ -208,8 +249,9 @@ const PosterGen = () => {
                   </div>
                 ))}
               </div>
+              <small>At least one element must be selected</small>
             </div>
-            
+
             <div className="form-group">
               <label>Mood</label>
               <div className="radio-group">
@@ -228,7 +270,7 @@ const PosterGen = () => {
                 ))}
               </div>
             </div>
-            
+
             <div className="form-group">
               <label>Text Placement</label>
               <div className="radio-group">
@@ -247,7 +289,7 @@ const PosterGen = () => {
                 ))}
               </div>
             </div>
-            
+
             <div className="form-group">
               <label htmlFor="additional_notes">Additional Notes</label>
               <textarea
@@ -259,23 +301,24 @@ const PosterGen = () => {
               />
             </div>
           </div>
-          
+
           <button type="submit" className="submit-btn" disabled={isLoading}>
             {isLoading ? 'Generating...' : 'Generate Poster'}
           </button>
         </form>
-        
+
         {error && (
           <div className="error-message">
-            <p>Error: {error}</p>
+            <p><strong>Error:</strong> {error}</p>
           </div>
         )}
-        
-        {response && (
+
+        {imageURLS.length > 0 && (
           <div className="response-container">
             <h2>Generated Posters</h2>
-            {/* Display your response data here */}
-            <pre>{JSON.stringify(response, null, 2)}</pre>
+            {imageURLS.map((url, index) => (
+              <img key={index} src={url} alt={`Generated Poster ${index + 1}`} width="300" height="300" />
+            ))}
           </div>
         )}
       </div>
@@ -283,4 +326,4 @@ const PosterGen = () => {
   );
 };
 
-export default PosterGen;
+export default PosterGenerator;
