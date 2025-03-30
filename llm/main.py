@@ -70,7 +70,7 @@ async def root():
                 "example_request": {
                     "task": "Organize college fest",
                     "departments": ["logistics", "marketing"],
-                    "currency": "USD"
+                    "currency": "INR"
                 }
             },
             "/generate-posters": {
