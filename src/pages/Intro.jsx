@@ -54,6 +54,17 @@ const Intro = () => {
 
   return (
     <div className="intro-container">
+
+      <div style={{display:'flex', justifyContent:'right', padding:'2vh 2vw'}}>
+        <button style={{padding:'1vh', background:'var(--light-red)', cursor:'pointer', marginRight:'10px'}}> Login </button>
+
+        <button style={{padding:'1vh', background:'var(--light-red)', cursor:'pointer'}}> Register </button>
+      </div>
+
+      <div>
+        <h1 style={{textAlign:'center', color:'white', fontFamily:'Quicksand', fontWeight:'1000', fontSize:'40px' }}>EventIQ</h1>
+      </div>
+
       <div className="intro-header">
         <h1>College Events Dashboard</h1>
         <div className="intro-controls">
