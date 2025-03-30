@@ -4,11 +4,11 @@ import { createEvent, getAllEvents, getEventById, updateEvent, deleteEvent, getP
 
 const router = express.Router();
 
-router.post("/", authMiddleware, createEvent);  // Create Event
-router.get("/", authMiddleware, getAllEvents);  // Get All Events
-router.get("/:id", authMiddleware, getEventById);  // Get Single Event by ID
-router.put("/:id", authMiddleware, updateEvent); // Update Event
-router.delete("/:id", authMiddleware, deleteEvent); // Delete Event
+router.post("/", createEvent);  // Create Event
+router.get("/", getAllEvents);  // Get All Events
+router.get("/:id", getEventById);  // Get Single Event by ID
+router.put("/:id", updateEvent); // Update Event
+router.delete("/:id", deleteEvent); // Delete Event
 router.get("/:eventId/participants", getParticipants);
 
 export default router;
