@@ -50,6 +50,64 @@ def validate_response(response: dict) -> dict:
                 budget["amount"] = 1.0  # Default minimum value
     return response
 
+@app.get("/", tags=["Root"], summary="API Documentation")
+async def root():
+    """Returns API documentation and available endpoints"""
+    return {
+        "API": "AI Task & Budget Manager",
+        "version": "1.0.0",
+        "description": "API for task analysis/budgeting and AI poster generation",
+        "endpoints": {
+            "/analyze-task": {
+                "method": "POST",
+                "description": "Analyzes tasks and provides budget breakdown",
+                "request_body": {
+                    "task": "string (required)",
+                    "departments": "list[string] (required)",
+                    "currency": "string (optional, default='INR')"
+                },
+                "response_model": "TaskResponse",
+                "example_request": {
+                    "task": "Organize college fest",
+                    "departments": ["logistics", "marketing"],
+                    "currency": "USD"
+                }
+            },
+            "/generate-posters": {
+                "method": "POST",
+                "description": "Generates AI posters based on specifications",
+                "request_body": {
+                    "theme": {
+                        "name": "string (required)",
+                        "description": "string (optional)"
+                    },
+                    "style": "string (e.g., 'modern', 'vintage')",
+                    "color_palette": "list[hex_colors]",
+                    "elements": "list[features]",
+                    "mood": "string (e.g., 'joyful', 'serious')",
+                    "text_placement": "string (e.g., 'center', 'top')"
+                },
+                "response_model": "PosterResponse",
+                "example_request": {
+                    "theme": {
+                        "name": "Tech Conference",
+                        "description": "Annual technology summit"
+                    },
+                    "style": "modern",
+                    "color_palette": ["#2563EB", "#1E40AF"],
+                    "elements": ["technology", "people"],
+                    "mood": "futuristic",
+                    "text_placement": "center"
+                }
+            }
+        },
+        "interactive_docs": {
+            "Swagger UI": "/docs",
+            "ReDoc": "/redoc"
+        },
+        "note": "All POST endpoints require proper authentication headers"
+    }
+    
 @app.post("/analyze-task")
 async def analyze_task(request: TaskRequest):
     try:
