@@ -8,14 +8,7 @@ const Intro = () => {
 
   const navigate = useNavigate();
 
-  const [events, setEvents] = useState([
-    { id: 1, eventName: "Annual Tech Symposium", committee: "Computer Science Club", date: "2025-04-15", venue: "Main Auditorium", status: "Upcoming" },
-    { id: 2, eventName: "Cultural Festival", committee: "Arts Association", date: "2025-04-02", venue: "College Grounds", status: "Active" },
-    { id: 3, eventName: "Career Fair", committee: "Placement Cell", date: "2025-03-30", venue: "Engineering Block", status: "Active" },
-    { id: 4, eventName: "Alumni Meet", committee: "Alumni Association", date: "2025-04-10", venue: "Conference Hall", status: "Upcoming" },
-    { id: 5, eventName: "Sports Tournament", committee: "Sports Committee", date: "2025-03-25", venue: "Sports Complex", status: "Completed" },
-    { id: 6, eventName: "Workshop on AI", committee: "IEEE Student Chapter", date: "2025-04-08", venue: "CS Lab", status: "Upcoming" },
-  ]);
+  const [events, setEvents] = useState([]);
 
   const [searchTerm, setSearchTerm] = useState('');
   const [selectedFilter, setSelectedFilter] = useState('All');
@@ -65,6 +58,12 @@ const Intro = () => {
   const handleRegister = () => {
     navigate("/register");
   }
+
+  useEffect(() => {
+    fetch(`${url}/event`,{
+      
+    })
+  }, [])
 
   return (
     <div className="intro-container">
@@ -152,8 +151,8 @@ const Intro = () => {
               </tr>
             </thead>
             <tbody>
-              {filteredEvents.length > 0 ? (
-                filteredEvents.map(event => (
+              {events.length > 0 ? (
+                events.map(event => (
                   <tr key={event.id}>
                     <td className="event-name">{event.eventName}</td>
                     <td>{event.committee}</td>
