@@ -3,42 +3,26 @@ import { Loader, AlertCircle } from 'lucide-react';
 import '../styles/taskList.css';
 
 const TaskList = () => {
-  const [tasks, setTasks] = useState([{
-    completed: false,
-    text: "Complete Figma design for the poster",
-    department: "Creatives",
-    dateFetched: new Date().toLocaleString()
-  },
-  {
-    completed: true,
-    text: "Complete Figma design for the poster",
-    department: "Creatives",
-    dateFetched: new Date().toLocaleString()
-  }
-]);
+  const [tasks, setTasks] = useState([]);
   const [loading, setLoading] = useState(false); // abhi ke liye false hai
   const [error, setError] = useState(null);
   const [fetchDate, setFetchDate] = useState('');
-  const url = "http://localhost:1000/task";
 
-  // useEffect(() => {
-  //       const fetchTasks = async () => {
-  //         try {
-  //           const response = await fetch(url); // Replace with actual API
-  //           if (!response.ok) throw new Error('Failed to fetch tasks');
+  useEffect(() => {
+        const fetchTasks = () => {
+          try {
             
-  //           const data = await response.json();
-  //           setTasks(data.map(task => ({ ...task, dateFetched: new Date().toLocaleString() })));
-  //           setFetchDate(new Date().toLocaleString());
-  //           setLoading(false);
-  //         } catch (err) {
-  //           setError(err.message);
-  //           setLoading(false);
-  //         }
-  //       };
+            fetch(`${url}/`)
+            
+            setLoading(false);
+          } catch (err) {
+            setError(err.message);
+            setLoading(false);
+          }
+        };
 
-  //       fetchTasks();
-  // }, []);
+        fetchTasks();
+  }, []);
 
   // const toggleTaskCompletion = (id) => {
   //   setTasks(tasks.map(task => 
