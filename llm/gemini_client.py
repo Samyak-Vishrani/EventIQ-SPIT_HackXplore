@@ -16,7 +16,7 @@ def analyze_tasks_with_budget(task: str, departments: List[str], currency: str =
     prompt = f"""
     You are an expert project manager with financial expertise. For this task:
     1. Break into subtasks if needed
-    2. Assign to departments: {", ".join(departments)}
+    2. Assign to departments (do not unnecessarily assign to every department if you feel there is no need to assign to this department then don't assign it): {", ".join(departments)}
     3. Estimate costs in {currency}
     
     Return ONLY JSON with this improved structure:
