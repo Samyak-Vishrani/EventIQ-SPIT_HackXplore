@@ -10,6 +10,7 @@ import EventCreationForm from "./pages/EventCreationForm";
 import DashboardCocom from "./pages/DashboardCocom";
 import DepartmentCocom from "./pages/DepartmentCocom";
 import Intro from "./pages/Intro";
+import PosterGenPage from "./pages/PosterGenPage";
 
 function App() {
 
@@ -34,6 +35,8 @@ function App() {
         <Route path="/yourdepartment" element={<DepartmentCocom />} />
 
         <Route path="/committee" element={<CommitteeList />} />
+
+        <Route path="/postergen" element={<PosterGenPage /> } />
 
       </Routes>
     </Router>

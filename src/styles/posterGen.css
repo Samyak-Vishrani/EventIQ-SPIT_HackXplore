@@ -1,0 +1,209 @@
+/* Main CSS file with scoped classes */
+:root {
+    --bg-color: #040f1a;
+    --dark-gray: #1C2128;
+    --dark-red: #2c3e50;
+    --light-red: #f5d6a8;
+    --light-grey: #EEEEEE;
+    --yellow: rgba(246, 255, 0, 0.724);
+  }
+  .poster-generator {
+    width: calc(100% - 250px);
+    height: calc(100vh - 75px);
+    background-color: var(--bg-color);
+    position: absolute;
+    z-index: 500;
+    left: 250px;
+    top: 75px;
+    overflow-y: scroll;
+  }
+  
+  .poster-generator .container-1 {
+    max-width: 1000px;
+    margin: 0 auto;
+    padding: 30px 20px;
+  }
+  
+  .poster-generator .title {
+    font-size: 2.5rem;
+    color: var(--light-red);
+    margin-bottom: 10px;
+    text-align: center;
+  }
+  
+  .poster-generator .subtitle {
+    font-size: 1.2rem;
+    color: var(--yellow);
+    margin-bottom: 40px;
+    text-align: center;
+  }
+  
+  .poster-generator .form-section {
+    background-color: var(--dark-gray);
+    border-radius: 10px;
+    padding: 20px;
+    margin-bottom: 30px;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);
+  }
+  
+  .poster-generator .form-section h2 {
+    color: var(--light-red);
+    margin-bottom: 20px;
+    border-bottom: 2px solid var(--dark-red);
+    padding-bottom: 10px;
+  }
+  
+  .poster-generator .form-group {
+    margin-bottom: 20px;
+    padding: 2vh 1vw;
+    box-sizing: border-box;
+  }
+
+  .poster-generator .form-group:hover {
+    background-color: rgb(46, 46, 46);
+  }
+  
+  .poster-generator label {
+    display: block;
+    margin-bottom: 8px;
+    font-weight: 500;
+  }
+  
+  .poster-generator input[type="text"],
+  .poster-generator textarea {
+    width: 100%;
+    padding: 12px;
+    background-color: var(--bg-color);
+    border: 1px solid var(--dark-red);
+    border-radius: 5px;
+    color: var(--light-grey);
+    font-size: 1rem;
+  }
+  
+  .poster-generator textarea {
+    min-height: 100px;
+    resize: vertical;
+  }
+  
+  .poster-generator input[type="text"]:focus,
+  .poster-generator textarea:focus {
+    outline: none;
+    border-color: var(--yellow);
+    box-shadow: 0 0 0 2px rgba(246, 255, 0, 0.2);
+  }
+  
+  .poster-generator .radio-group,
+  .poster-generator .checkbox-group {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 15px;
+  }
+  
+  .poster-generator .radio-option,
+  .poster-generator .checkbox-option {
+    display: flex;
+    align-items: center;
+    margin-right: 15px;
+  }
+  
+  .poster-generator .radio-option label,
+  .poster-generator .checkbox-option label {
+    margin-left: 8px;
+    margin-bottom: 0;
+    cursor: pointer;
+  }
+  
+  .poster-generator .color-palette {
+    display: flex;
+    gap: 15px;
+    flex-wrap: wrap;
+  }
+  
+  .poster-generator .color-input {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
+  
+  .poster-generator .color-input input[type="color"] {
+    width: 50px;
+    height: 50px;
+    border: none;
+    border-radius: 5px;
+    background: none;
+    cursor: pointer;
+  }
+  
+  .poster-generator .color-input span {
+    margin-top: 5px;
+    font-size: 0.9rem;
+  }
+  
+  .poster-generator .submit-btn {
+    display: block;
+    width: 100%;
+    padding: 15px;
+    background-color: var(--dark-red);
+    color: var(--light-grey);
+    border: none;
+    border-radius: 5px;
+    font-size: 1.1rem;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.3s ease;
+  }
+  
+  .poster-generator .submit-btn:hover {
+    background-color: #3d5a74;
+  }
+  
+  .poster-generator .submit-btn:disabled {
+    opacity: 0.7;
+    cursor: not-allowed;
+  }
+  
+  .poster-generator .error-message {
+    background-color: rgba(255, 0, 0, 0.1);
+    border-left: 4px solid #ff0000;
+    padding: 15px;
+    margin-top: 30px;
+    border-radius: 5px;
+  }
+  
+  .poster-generator .response-container {
+    margin-top: 40px;
+    background-color: var(--dark-gray);
+    border-radius: 10px;
+    padding: 20px;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);
+  }
+  
+  .poster-generator .response-container h2 {
+    color: var(--light-red);
+    margin-bottom: 20px;
+  }
+  
+  .poster-generator pre {
+    background-color: var(--bg-color);
+    padding: 15px;
+    border-radius: 5px;
+    overflow-x: auto;
+    white-space: pre-wrap;
+    word-wrap: break-word;
+  }
+  
+  @media (max-width: 768px) {
+    .poster-generator .radio-group,
+    .poster-generator .checkbox-group {
+      flex-direction: column;
+      gap: 10px;
+    }
+    
+    .poster-generator .color-palette {
+      justify-content: center;
+    }
+    
+    .poster-generator .title {
+      font-size: 2rem;
+    }
+  }
