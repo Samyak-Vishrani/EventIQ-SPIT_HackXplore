@@ -17,31 +17,31 @@ const Intro = () => {
     setSearchTerm(e.target.value);
   };
 
-  const handleFilterChange = (filter) => {
-    setSelectedFilter(filter);
-  };
+  // const handleFilterChange = (filter) => {
+  //   setSelectedFilter(filter);
+  // };
 
-  const filteredEvents = events.filter(event => {
-    const matchesSearch =
-      event.eventName.toLowerCase().includes(searchTerm.toLowerCase()) ||
-      event.committee.toLowerCase().includes(searchTerm.toLowerCase()) ||
-      event.venue.toLowerCase().includes(searchTerm.toLowerCase());
+  // const filteredEvents = events.filter(event => {
+  //   const matchesSearch =
+  //     event.eventName.toLowerCase().includes(searchTerm.toLowerCase()) ||
+  //     event.committee.toLowerCase().includes(searchTerm.toLowerCase()) ||
+  //     event.venue.toLowerCase().includes(searchTerm.toLowerCase());
 
-    const matchesFilter =
-      selectedFilter === 'All' ||
-      event.status === selectedFilter;
+  //   const matchesFilter =
+  //     selectedFilter === 'All' ||
+  //     event.status === selectedFilter;
 
-    return matchesSearch && matchesFilter;
-  });
+  //   return matchesSearch && matchesFilter;
+  // });
 
-  const getStatusClass = (status) => {
-    switch (status) {
-      case 'Active': return 'status-active';
-      case 'Upcoming': return 'status-upcoming';
-      case 'Completed': return 'status-completed';
-      default: return '';
-    }
-  };
+  // const getStatusClass = (status) => {
+  //   switch (status) {
+  //     case 'Active': return 'status-active';
+  //     case 'Upcoming': return 'status-upcoming';
+  //     case 'Completed': return 'status-completed';
+  //     default: return '';
+  //   }
+  // };
 
   const formatDate = (dateString) => {
     return new Date(dateString).toLocaleDateString('en-US', {
@@ -60,10 +60,15 @@ const Intro = () => {
   }
 
   useEffect(() => {
-    fetch(`${url}/event`,{
-      
+    fetch(`${url}/event`)
+    .then((res) => res.json())
+    .then((data) => {
+      console.log(data);
+      setEvents(data)
     })
   }, [])
+
+  console.log("events: ", events);
 
   return (
     <div className="intro-container">
@@ -144,7 +149,7 @@ const Intro = () => {
             <thead>
               <tr>
                 <th>Event Name</th>
-                <th>Organizing Committee</th>
+                <th>Venue</th>
                 <th>Date</th>
                 {/* <th>Venue</th>
                 <th>Status</th> */}
@@ -154,9 +159,9 @@ const Intro = () => {
               {events.length > 0 ? (
                 events.map(event => (
                   <tr key={event.id}>
-                    <td className="event-name">{event.eventName}</td>
-                    <td>{event.committee}</td>
-                    <td>{formatDate(event.date)}</td>
+                    <td className="event-name">{event.event_name}</td>
+                    <td>{event.event_venue}</td>
+                    <td>{formatDate(event.event_date)}</td>
                     {/* <td>{event.venue}</td>
                     <td>
                       <span className={`status-badge ${getStatusClass(event.status)}`}>
