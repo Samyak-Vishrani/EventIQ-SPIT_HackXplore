@@ -9,23 +9,25 @@ const CommitteeList = () => {
 
     useEffect(() => {
         fetch(`${url}/committee`)
-        .then((res) => res.json())
-        .then((data) => {
-            console.log(data);
-            setCommittees(data);
-        })
-        .catch(error => console.error("Error fetching committees:", error));
+            .then((res) => res.json())
+            .then((data) => {
+                console.log(data);
+                setCommittees(data);
+            })
+            .catch(error => console.error("Error fetching committees:", error));
     }, []);
 
     return (
         <div className="committee-list-page">
             <h1>Committee Lists</h1>
-            {committees.map((committee, index) => (
-                <div key={committee._id || index} className="committee-box">
-                    <h1>{committee.name}</h1>
-                    <button onClick={() => setSelectedCommittee(committee)}>Join</button>
-                </div>
-            ))}
+            <div style={{display:'flex', flexWrap:'wrap', justifyContent:'left', width:'100%'}}>
+                {committees.map((committee, index) => (
+                    <div key={committee._id || index} className="committee-box">
+                        <h1>{committee.name}</h1>
+                        <button onClick={() => setSelectedCommittee(committee)}>Join</button>
+                    </div>
+                ))}
+            </div>
 
             {selectedCommittee && (
                 <Modal committee={selectedCommittee} onClose={() => setSelectedCommittee(null)} />

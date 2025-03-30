@@ -2,8 +2,11 @@ import React, { useState } from "react";
 import Cookies from "js-cookie";
 import "../styles/Login.css";
 import url from "../apis/urls";
+import { useNavigate } from "react-router-dom";
 
 const Login = () => {
+  const navigate = useNavigate();
+  
   const [formData, setFormData] = useState({
     email: "",
     password: ""
@@ -16,8 +19,6 @@ const Login = () => {
       [name]: value
     }));
   };
-
-  Cookies.remove("userId");
 
   const handleLogin = async (e) => {
     e.preventDefault();
@@ -38,6 +39,9 @@ const Login = () => {
         Cookies.set("userId", data.user._id, { expires: 7 }); // Store user ID in cookies for 7 days
         console.log("User ID stored in cookies:", data.user._id);
       }
+
+      navigate("/committee");
+
       // Handle successful login here (e.g., store token, redirect)
     } catch (error) {
       console.error("Error:", error);

@@ -4,7 +4,7 @@
 }
 
 .committee-box {
-    width: 50%;
+    width: 300px;
     border-radius: 10px;
     background-color: var(--dark-red);
     margin: 2vh auto;
