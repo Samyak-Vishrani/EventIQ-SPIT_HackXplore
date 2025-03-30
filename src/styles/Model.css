@@ -62,7 +62,7 @@
     background-color: var(--dark-red);
     border-radius: 8px;
     transition: transform 0.3s ease;
-    height: 200px;
+    height: fit-content;
 }
 
 .join-container .card:hover {

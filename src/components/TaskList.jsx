@@ -1,6 +1,8 @@
-import React, { useEffect, useState } from 'react'; 
+import React, { useEffect, useState } from 'react';
 import { Loader, AlertCircle } from 'lucide-react';
 import '../styles/taskList.css';
+import url from "../apis/urls";
+import Cookies from "js-cookie";
 
 const TaskList = () => {
   const [tasks, setTasks] = useState([]);
@@ -9,20 +11,28 @@ const TaskList = () => {
   const [fetchDate, setFetchDate] = useState('');
 
   useEffect(() => {
-        const fetchTasks = () => {
-          try {
-            
-            fetch(`${url}/`)
-            
-            setLoading(false);
-          } catch (err) {
-            setError(err.message);
-            setLoading(false);
-          }
-        };
+    const fetchTasks = () => {
+      try {
 
-        fetchTasks();
+        fetch(`${url}/committee/joiningCode/${Cookies.get("joining-code")}/departments`)
+          .then((res) => res.json())
+          .then((data) => {
+            console.log(data.departments);
+            const allTasks = data.departments.flatMap(department => department.tasks);
+            setTasks(allTasks);
+          })
+
+        setLoading(false);
+      } catch (err) {
+        setError(err.message);
+        setLoading(false);
+      }
+    };
+
+    fetchTasks();
   }, []);
+
+  console.log(tasks);
 
   // const toggleTaskCompletion = (id) => {
   //   setTasks(tasks.map(task => 
@@ -58,15 +68,16 @@ const TaskList = () => {
         ) : (
           <ul className="task-list">
             {tasks.map(task => (
+              task != "" &&
               <li key={task.id} className="task-item">
-                <input 
+                <input
                   type="checkbox"
-                  checked={task.completed} 
+                  checked={task.completed}
                   onCheckedChange={() => toggleTaskCompletion(task.id)}
                   className="task-checkbox"
                 />
                 <span className={`task-text ${task.completed ? 'completed' : ''}`}>
-                  {task.text}
+                  {task}
                 </span>
                 <span className="task-department">{task.department}</span>
                 <span className="task-date">{task.dateFetched}</span>

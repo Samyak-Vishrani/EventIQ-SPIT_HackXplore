@@ -123,9 +123,9 @@ const ResponsiveAppBar = () => {
 
                         <button style={{ height: 'fit-content', padding: '1vh 1vw', background:'var(--dark-red)', color:'white', border:'none', outline:'none', cursor:'pointer' }} onClick={handleCreateEvent} >Create new Event</button>
 
-                        <select style={{ height: 'fit-content', padding: '1vh 1vw', background:'var(--dark-red)', color:'white', border:'none', outline:'none' }}>
+                        {/* <select style={{ height: 'fit-content', padding: '1vh 1vw', background:'var(--dark-red)', color:'white', border:'none', outline:'none' }}>
                             <option>Switch Event</option>
-                        </select>
+                        </select> */}
 
                         <button
                             onClick={handleCloseNavMenu}

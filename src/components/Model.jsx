@@ -33,7 +33,9 @@ const Modal = ({ committee, onClose }) => {
                 .then(data => {
 
                     console.log("Admin response:", data);
-                    if(data.message === "Login successful") {
+                    if (data.message === "Login successful") {
+                        Cookies.set("joining-code", joiningCode, { expires: 7 });
+                        setShowNewWindow(true);
                         navigate("/dashboard");
                     }
 
@@ -52,7 +54,7 @@ const Modal = ({ committee, onClose }) => {
                 .then(response => response.json())
                 .then(data => {
                     console.log("Co-com response:", data)
-                    Cookies.set("joining-code", joiningCode, {expires: 7});
+                    Cookies.set("joining-code", joiningCode, { expires: 7 });
                     setShowNewWindow(true);
                 })
                 .catch(error => console.error("Error joining co-com:", error));
@@ -72,6 +74,8 @@ const Modal = ({ committee, onClose }) => {
                                 <input type="email" name="email" placeholder="Enter Committee Email" required onChange={handleChangeAdmin} value={adminData.email} />
 
                                 <input type="password" name="password" placeholder="Enter Password" required onChange={handleChangeAdmin} value={adminData.password} />
+
+                                <input type="text" placeholder="Enter Joining Code" required onChange={(e) => setJoiningCode(e.target.value)} value={joiningCode} />
 
                                 <button onClick={handleAdminReq}>Join</button>
                             </div>
@@ -101,12 +105,12 @@ const NewWindow = ({ onClose, joiningCode }) => {
             .then((data) => {
                 setDept(data.departments);
                 console.log(data.departments);
-    });
+            });
     }, []);
 
     const handleProceed = () => {
-        if(selectedOption) {
-            Cookies.set("department-cocom", selectedOption, {expires: 7})
+        if (selectedOption) {
+            Cookies.set("department-cocom", selectedOption, { expires: 7 })
             navigate("/dashboardcocom");
         } else {
             alert("Please Select department to proceed");
