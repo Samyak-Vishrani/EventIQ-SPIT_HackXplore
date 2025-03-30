@@ -11,6 +11,7 @@ import Tooltip from '@mui/material/Tooltip';
 import AdbIcon from '@mui/icons-material/Adb';
 import notif from '../assets/notif.svg';
 import profile from '../assets/profile.svg';
+import ProfileButton from './ProfileButton';
 
 const NavbarCocom = () => {
     const [anchorElNav, setAnchorElNav] = React.useState(null);
@@ -111,11 +112,13 @@ const NavbarCocom = () => {
                         >
                             <img src={notif} alt="Notifications" />
                         </IconButton>
-                        <Tooltip title="View Profile">
+                        {/* <Tooltip title="View Profile">
                             <IconButton onClick={handleOpenUserMenu} sx={{ p: 0 }}>
                                 <img src={profile} alt="Profile" />
                             </IconButton>
-                        </Tooltip>
+                        </Tooltip> */}
+                        <ProfileButton />
+
                     </Box>
                 </Toolbar>
             </Container>

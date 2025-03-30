@@ -14,6 +14,7 @@ import notif from '../assets/notif.svg';
 import announce from '../assets/announce.svg';
 import profile from '../assets/profile.svg';
 import { useNavigate } from 'react-router-dom';
+import ProfileButton from './ProfileButton';
 
 const pages = ['Notification', 'Announcements'];
 
@@ -140,14 +141,15 @@ const ResponsiveAppBar = () => {
                         </button>
 
                     </Box>
-                    <Box sx={{ flexGrow: 0 }}>
+                    {/* <Box sx={{ flexGrow: 0 }}>
                         <Tooltip title="view profile">
                             <IconButton onClick={handleOpenUserMenu} sx={{ p: 0, marginLeft:'10px' }}>
                                 <img src={profile} />
                             </IconButton>
                         </Tooltip>
                         
-                    </Box>
+                    </Box> */}
+                    <ProfileButton />
                 </Toolbar>
             </Container>
         </AppBar>
