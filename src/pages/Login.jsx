@@ -17,6 +17,8 @@ const Login = () => {
     }));
   };
 
+  Cookies.remove("userId");
+
   const handleLogin = async (e) => {
     e.preventDefault();
     console.log("Logging in with:", { email: formData.email, password: formData.password });
@@ -32,6 +34,7 @@ const Login = () => {
       
       const data = await response.json();
       if (data.user && data.user._id) {
+        Cookies.set("token", data.token)
         Cookies.set("userId", data.user._id, { expires: 7 }); // Store user ID in cookies for 7 days
         console.log("User ID stored in cookies:", data.user._id);
       }

@@ -1,7 +1,13 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import '../styles/Intro.css';
+import bg_1 from "../assets/bg-1.jpg";
+import { useNavigate } from 'react-router-dom';
+import url from "../apis/urls";
 
 const Intro = () => {
+
+  const navigate = useNavigate();
+
   const [events, setEvents] = useState([
     { id: 1, eventName: "Annual Tech Symposium", committee: "Computer Science Club", date: "2025-04-15", venue: "Main Auditorium", status: "Upcoming" },
     { id: 2, eventName: "Cultural Festival", committee: "Arts Association", date: "2025-04-02", venue: "College Grounds", status: "Active" },
@@ -23,20 +29,20 @@ const Intro = () => {
   };
 
   const filteredEvents = events.filter(event => {
-    const matchesSearch = 
+    const matchesSearch =
       event.eventName.toLowerCase().includes(searchTerm.toLowerCase()) ||
       event.committee.toLowerCase().includes(searchTerm.toLowerCase()) ||
       event.venue.toLowerCase().includes(searchTerm.toLowerCase());
-    
-    const matchesFilter = 
-      selectedFilter === 'All' || 
+
+    const matchesFilter =
+      selectedFilter === 'All' ||
       event.status === selectedFilter;
-    
+
     return matchesSearch && matchesFilter;
   });
 
   const getStatusClass = (status) => {
-    switch(status) {
+    switch (status) {
       case 'Active': return 'status-active';
       case 'Upcoming': return 'status-upcoming';
       case 'Completed': return 'status-completed';
@@ -52,17 +58,28 @@ const Intro = () => {
     });
   };
 
+  const handleLogin = () => {
+    navigate("/login");
+  }
+
+  const handleRegister = () => {
+    navigate("/register");
+  }
+
   return (
     <div className="intro-container">
 
-      <div style={{display:'flex', justifyContent:'right', padding:'2vh 2vw'}}>
-        <button style={{padding:'1vh', background:'var(--light-red)', cursor:'pointer', marginRight:'10px'}}> Login </button>
+      <div style={{ display: 'flex', justifyContent: 'right', padding: '2vh 2vw', marginTop: '5vh' }}>
 
-        <button style={{padding:'1vh', background:'var(--light-red)', cursor:'pointer'}}> Register </button>
+        <button style={{ padding: '1vh 2vw', background: 'var(--light-red)', cursor: 'pointer', marginRight: '10px' }} onClick={handleLogin} > Login </button>
+
+        <button style={{ padding: '1vh 2vw', background: 'var(--light-red)', cursor: 'pointer' }} onClick={handleRegister} > Register </button>
       </div>
 
-      <div>
-        <h1 style={{textAlign:'center', color:'white', fontFamily:'Quicksand', fontWeight:'1000', fontSize:'40px' }}>EventIQ</h1>
+      <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center' }}>
+        <h1 style={{ textAlign: 'center', color: 'white', fontFamily: 'Quicksand', fontWeight: '1000', fontSize: '40px' }}>EventIQ</h1>
+        <p style={{ color: 'white', textAlign: 'center', width: '60vw' }}>EventIQ streamlines event planning by empowering admins with AI-driven task management. It efficiently assigns tasks across departments—logistics, technical, and creatives—ensuring smooth coordination. Additionally, it features automated poster generation using simple, user-friendly prompts, making event branding effortless.</p>
+        <img style={{ width: '80vw', textAlign: 'center' }} src={bg_1} />
       </div>
 
       <div className="intro-header">
