@@ -3,7 +3,7 @@ import Event from "../models/event.model.js";
 // Create an Event
 export const createEvent = async (req, res) => {
   try {
-    const { event_name, event_description, event_date, committeeId, video, summary_video } = req.body;
+    const { event_name, event_description, event_date, event_venue, committeeId, video, summary_video } = req.body;
 
     const newEvent = new Event({
       event_name,
